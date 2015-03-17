@@ -214,7 +214,7 @@ AADot.prototype = {
     var b = this.getBrightness();
     // Math.floor((明度 * stringListの配列数) + 明度を上げるための定数)
     var s = this.stringList[~~(b*(l-1)+0.5)];
-    
+
     return s;
     
   },
@@ -232,6 +232,7 @@ AADot.prototype = {
   getBrightness : function(){
     
     var t = this.r + this.g + this.b;
+    // console.log(t);
     
     return t / 765;
     
