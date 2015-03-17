@@ -45,25 +45,20 @@ function showVideo(){
     }
   };
 
-
-  // var img = document.createElement("img");
-  // var aa = new AA();
-  // aa.init(img);
-
-
   // 繰り返し行う処理    
   var onFrame = function () {  
     ctx.drawImage(video, 0, 0, w, h);           // 動画のフレームをcanvusに描画
     var im = ctx.getImageData(0, 0, w, h);  // canvusから画像データを取得
-//     colorToGray(im.data, gray);                 // カラー画像をグレースケールに変換
+    //colorToGray(im.data, gray);                 // カラー画像をグレースケールに変換
+    changeToAA(im.data, gray);                 // カラー画像をグレースケールに変換
     requestAnimationFrame(onFrame);         // 再帰
-//     drawGrayImg(im, gray, ctx);                 // グレースケール画像を描画 
-
-    // var str = aa.getHtmlString();    
-    // document.getElementById("target").innerHTML  = str;
+    drawGrayImg(im, gray, ctx);                 // グレースケール画像を描画 
   };
 }
 
+function changeToAA() {
+  // window.alert('helo');
+}
 
 
 
@@ -73,65 +68,85 @@ function showVideo(){
 
 
 
-
-
-
-
+// function draw() {
+//   var canvas = document.getElementById('c1');
+//   if ( ! canvas || ! canvas.getContext ) { return false; }
+//   var ctx = canvas.getContext('2d');
+//   ctx.beginPath();
+//   /* グラデーション領域をセット */
+//   var grad  = ctx.createLinearGradient(0,0, 0,140);
+//   /*グラデーション終点のオフセットと色をセット */
+//   grad.addColorStop(0,'rgb(192, 80, 77)');    // 赤
+//   grad.addColorStop(0.5,'rgb(155, 187, 89)'); // 緑
+//   grad.addColorStop(1,'rgb(128, 100, 162)');  // 紫
+//   /* グラデーションをfillStyleプロパティにセット */
+//   ctx.fillStyle = grad;
+//   /* 矩形を描画 */
+//   ctx.rect(0,0, 140,140);
+//   ctx.fill();
+// }
 
 window.onload = function() {
-  draw();
-};
-function draw() {
   var canvas = document.getElementById('c1');
   if ( ! canvas || ! canvas.getContext ) { return false; }
   var ctx = canvas.getContext('2d');
-  ctx.beginPath();
-  /* グラデーション領域をセット */
-  var grad  = ctx.createLinearGradient(0,0, 0,140);
-  /* グラデーション終点のオフセットと色をセット */
-  grad.addColorStop(0,'rgb(192, 80, 77)');    // 赤
-  grad.addColorStop(0.5,'rgb(155, 187, 89)'); // 緑
-  grad.addColorStop(1,'rgb(128, 100, 162)');  // 紫
-  /* グラデーションをfillStyleプロパティにセット */
-  ctx.fillStyle = grad;
-  /* 矩形を描画 */
-  ctx.rect(0,0, 140,140);
-  ctx.fill();
+  ctx.font = '10px "MS Pゴシック"';
+
+  var str = ['W','/','[','l','[','[','[','[','[','/','[','/','[','/','l','9','W','%','%','%','W','@','%','W','W','W','@','@','@','W','W','W','@','W','[','[','/','/','[','[','/','/','/','/','/','/','/'];
+
+  function draw(str, x, y) {
+    // ctx.clearRect(0,0,300,200);
+    ctx.fillStyle = "#f00";
+    ctx.fillText(str, x, y);
+
+    // ctx.clearRect(0,0,300,200);
+    // ctx.beginPath();
+    // ctx.arc(x,y,30,0,Math.PI*2,true);
+    // ctx.stroke();
+    
+    // ctx.clearRect(0,0,300,200);
+    // ctx.fillRect(x,y,50,50);
+  }
+
+  var point = { x: 0, y: 50 };
+  var deg = 30;
+  var x = point.x;
+  var strWidth = 6;
+
+  // var loop = function() {
+  //   point.x = (Math.sin(new Date().getTime() / 400) * 50) + 100;
+  //   point.y = (Math.cos(new Date().getTime() / 500) * 3) + 60;
+  //   deg++;
+  //   draw(point.x, point.y);
+  //   var timer = setTimeout(loop, 10);
+  // };
+  for (var i = 0; i < str.length; i++) {
+    // var _x = point.x + 4;
+    x += strWidth;
+    // str[i]
+    draw(str[i], x, point.y);
+  };
+  // loop();
 }
+
+
+
+
+
+
+
+
 
 
 setTimeout(function(){
   
-  // var img = document.createElement("img");
-
-
-  var canvas = document.getElementById('c1');
-  if ( ! canvas || ! canvas.getContext ) { return false; }
-  var ctx = canvas.getContext('2d');
-  ctx.beginPath();
-  /* グラデーション領域をセット */
-  var grad  = ctx.createLinearGradient(0,0, 0,140);
-  /* グラデーション終点のオフセットと色をセット */
-  grad.addColorStop(0,'rgb(192, 80, 77)');    // 赤
-  grad.addColorStop(0.5,'rgb(155, 187, 89)'); // 緑
-  grad.addColorStop(1,'rgb(128, 100, 162)');  // 紫
-  /* グラデーションをfillStyleプロパティにセット */
-  ctx.fillStyle = grad;
-  /* 矩形を描画 */
-  ctx.rect(0,0, 140,140);
-  ctx.fill();
-
-
+  var img = document.createElement("img");
   
-  // img.onload = function(e){
-  window.onload = function(e){
-
-    window.alert('hoge');
+  img.onload = function(e){
 
     // 初期化    
     var aa = new AA();
-    aa.init(ctx);
-    // aa.init(img);
+    aa.init(img);
     
     setInterval(function(){
       
@@ -142,7 +157,7 @@ setTimeout(function(){
     },1000);
   };
   
-  // img.src = "data:image/jpeg;base64,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";
+  img.src = "data:image/jpeg;base64,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";
   
 },0);
 
@@ -164,7 +179,6 @@ AA.prototype = {
     
     var imageData = this._convertToImageData(image);
     var data = imageData.data; // RGBA情報を配列で取得する
-    conso.log('helo');
     var i = 0,
       l = h,
       w = imageData.width,
