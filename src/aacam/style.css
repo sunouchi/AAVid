@@ -1,7 +1,13 @@
-#target{
-  
+#video {
+  height: 300px;
+  margin-top: 20px;
+  width: 400px;
+}
+
+#target{  
   font-family: Consolas,Courier,monospace;
   font-size:9px;
   line-height:0.6;
-  letter-spacing: 0em;
+  letter-spacing: 0.1em;
+  margin-top: 20px;
 }
