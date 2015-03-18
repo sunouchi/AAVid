@@ -282,10 +282,10 @@ AADot.prototype = {
   // 色を指定したHTMLを出力する
   toHtmlString : function(){
 
-    var s = '<span style="color:rgb(' + this.r + ',' + this.g +',' + this.b + ');">' + this.toString() + "</span>";
+    // var s = '<span style="color:rgb(' + this.r + ',' + this.g +',' + this.b + ');">' + this.toString() + "</span>";
 
-    // var brightness = this.getBrightness();    
-    // var s = '<span style="color:rgb(' + brightness + ',' + brightness +',' + brightness + ');">' + this.toString() + "</span>";
+    var brightness = this.getBrightness();    
+    var s = '<span style="color:rgb(' + brightness + ',' + brightness +',' + brightness + ');">' + this.toString() + "</span>";
     
     return s;
     
